@@ -144,27 +144,7 @@ export default function StreamPlayer() {
           </div>
         </div>
 
-        {/* Info Section */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-secondary border border-border rounded-lg p-4">
-            <h4 className="font-bold text-white mb-2">Transmissão</h4>
-            <p className="text-sm text-gray-400">
-              Acompanhe a análise completa do jogo com comentários ao vivo.
-            </p>
-          </div>
-          <div className="bg-secondary border border-border rounded-lg p-4">
-            <h4 className="font-bold text-white mb-2">Comunidade</h4>
-            <p className="text-sm text-gray-400">
-              Interaja com outros torcedores no chat em tempo real.
-            </p>
-          </div>
-          <div className="bg-secondary border border-border rounded-lg p-4">
-            <h4 className="font-bold text-white mb-2">Conteúdo</h4>
-            <p className="text-sm text-gray-400">
-              Acesso exclusivo a análises e conteúdos especiais.
-            </p>
-          </div>
-        </div>
+
       </div>
     </section>
   );

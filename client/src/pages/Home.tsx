@@ -1,8 +1,7 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import StreamPlayer from "@/components/StreamPlayer";
-import GameCalendar from "@/components/GameCalendar";
-import NewsSection from "@/components/NewsSection";
+import CalendarAndStandings from "@/components/CalendarAndStandings";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -12,8 +11,7 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
         <StreamPlayer />
-        <GameCalendar />
-        <NewsSection />
+        <CalendarAndStandings />
       </main>
       <Footer />
     </div>
