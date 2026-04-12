@@ -1,130 +1,8 @@
 import { TrendingUp } from "lucide-react";
-import { useEffect, useState } from "react";
-
-interface Team {
-  position: number;
-  name: string;
-  played: number;
-  wins: number;
-  draws: number;
-  losses: number;
-  goalsFor: number;
-  goalsAgainst: number;
-  goalDifference: number;
-  points: number;
-  isCorinthians?: boolean;
-}
+import { useBrazileiraoStandings } from "@/hooks/useBrazileiraoData";
 
 export default function BrazilianStandings() {
-  const [standings, setStandings] = useState<Team[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Dados simulados da tabela do Brasileirão
-    // Em produção, isso viria de uma API real
-    const mockStandings: Team[] = [
-      {
-        position: 1,
-        name: "Palmeiras",
-        played: 10,
-        wins: 7,
-        draws: 2,
-        losses: 1,
-        goalsFor: 22,
-        goalsAgainst: 8,
-        goalDifference: 14,
-        points: 23,
-      },
-      {
-        position: 2,
-        name: "Botafogo",
-        played: 10,
-        wins: 6,
-        draws: 3,
-        losses: 1,
-        goalsFor: 18,
-        goalsAgainst: 9,
-        goalDifference: 9,
-        points: 21,
-      },
-      {
-        position: 3,
-        name: "Flamengo",
-        played: 10,
-        wins: 6,
-        draws: 2,
-        losses: 2,
-        goalsFor: 19,
-        goalsAgainst: 11,
-        goalDifference: 8,
-        points: 20,
-      },
-      {
-        position: 4,
-        name: "Corinthians",
-        played: 9,
-        wins: 5,
-        draws: 2,
-        losses: 2,
-        goalsFor: 15,
-        goalsAgainst: 10,
-        goalDifference: 5,
-        points: 17,
-        isCorinthians: true,
-      },
-      {
-        position: 5,
-        name: "São Paulo",
-        played: 10,
-        wins: 5,
-        draws: 1,
-        losses: 4,
-        goalsFor: 16,
-        goalsAgainst: 13,
-        goalDifference: 3,
-        points: 16,
-      },
-      {
-        position: 6,
-        name: "Internacional",
-        played: 10,
-        wins: 4,
-        draws: 3,
-        losses: 3,
-        goalsFor: 14,
-        goalsAgainst: 12,
-        goalDifference: 2,
-        points: 15,
-      },
-      {
-        position: 7,
-        name: "Grêmio",
-        played: 10,
-        wins: 4,
-        draws: 2,
-        losses: 4,
-        goalsFor: 13,
-        goalsAgainst: 14,
-        goalDifference: -1,
-        points: 14,
-      },
-      {
-        position: 8,
-        name: "Cruzeiro",
-        played: 10,
-        wins: 3,
-        draws: 4,
-        losses: 3,
-        goalsFor: 12,
-        goalsAgainst: 11,
-        goalDifference: 1,
-        points: 13,
-      },
-    ];
-
-    setStandings(mockStandings);
-    setLoading(false);
-  }, []);
+  const { standings, loading, error } = useBrazileiraoStandings();
 
   if (loading) {
     return (
@@ -141,6 +19,13 @@ export default function BrazilianStandings() {
         <TrendingUp size={24} className="text-accent" />
         <h3 className="text-xl font-bold text-white">TABELA BRASILEIRÃO</h3>
       </div>
+
+      {/* Error Message */}
+      {error && (
+        <div className="bg-yellow-900/20 border-b border-yellow-700 px-6 py-2 text-xs text-yellow-400">
+          {error}
+        </div>
+      )}
 
       {/* Table */}
       <div className="overflow-x-auto">
