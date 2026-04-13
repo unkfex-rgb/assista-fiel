@@ -17,8 +17,8 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container text-center text-white flex items-start justify-center pt-20 md:pt-40">
-        <div className="space-y-4">
+      <div className="relative z-10 container text-center text-white flex items-start justify-center pt-12 md:pt-24">
+        <div className="space-y-3">
           <div className="inline-block">
             <span 
               className="text-sm md:text-base font-medium px-4 py-2 bg-accent text-background rounded"

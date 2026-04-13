@@ -87,7 +87,7 @@ export default function StreamPlayer() {
             {/* Kick Chat Embed - Using iframe */}
             <div className="flex-1 overflow-hidden">
               <iframe
-                src="https://kick.com/corintia420/chat"
+                src="https://kick.com/popout/corintia420/chat"
                 title="Chat Kick - Corintia420"
                 className="w-full h-full border-0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
