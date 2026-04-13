@@ -1,32 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ChevronLeft, ChevronRight, MessageCircle, LogIn } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export default function StreamPlayer() {
   const [chatWidth, setChatWidth] = useState(350);
   const [isDragging, setIsDragging] = useState(false);
-  const [isKickLoaded, setIsKickLoaded] = useState(false);
-
-  useEffect(() => {
-    // Carregar script do Kick Chat Embed
-    const script = document.createElement("script");
-    script.src = "https://kick.com/embed-chat.js";
-    script.async = true;
-    script.onload = () => {
-      setIsKickLoaded(true);
-      // Recarregar embeds Kick se disponível
-      if ((window as any).kickEmbed) {
-        (window as any).kickEmbed.reload();
-      }
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
 
   const handleMouseDown = () => {
     setIsDragging(true);
@@ -100,37 +77,28 @@ export default function StreamPlayer() {
             <div className="bg-primary border-b border-border px-4 py-3 flex items-center justify-between">
               <h3 className="font-bold text-white flex items-center gap-2">
                 <MessageCircle size={18} />
-                Chat Kick
+                Chat do Povo!
               </h3>
               <button className="text-gray-400 hover:text-white transition-colors">
                 <ChevronRight size={20} />
               </button>
             </div>
 
-            {/* Kick Chat Embed */}
+            {/* Kick Chat Embed - Using iframe */}
             <div className="flex-1 overflow-hidden">
-              {isKickLoaded ? (
-                <div
-                  data-kick-embed="corintia420"
-                  className="w-full h-full"
-                  style={{ minHeight: "400px" }}
-                />
-              ) : (
-                <div className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col justify-center items-center text-center">
-                  <div className="text-gray-400">
-                    <MessageCircle size={48} className="mx-auto mb-4 opacity-50" />
-                    <p className="font-semibold mb-2">Carregando Chat Kick...</p>
-                    <p className="text-sm">Conecte sua conta Kick para participar</p>
-                  </div>
-                </div>
-              )}
+              <iframe
+                src="https://kick.com/corintia420/chat"
+                title="Chat Kick - Corintia420"
+                className="w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              />
             </div>
 
             {/* Chat Info Footer */}
             <div className="border-t border-border p-3 bg-background/50">
               <div className="flex items-center gap-2 text-xs text-gray-400">
                 <LogIn size={14} />
-                <span>Faça login para comentar</span>
+                <span>Conecte sua conta Kick para comentar</span>
               </div>
             </div>
           </div>
