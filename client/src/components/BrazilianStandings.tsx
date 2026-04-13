@@ -1,8 +1,8 @@
 import { TrendingUp } from "lucide-react";
-import { useBrazileiraoStandings } from "@/hooks/useBrazileiraoData";
+import { useBrazileiraoTabela } from "@/hooks/useRealFootballData";
 
 export default function BrazilianStandings() {
-  const { standings, loading, error } = useBrazileiraoStandings();
+  const { tabela, loading, error } = useBrazileiraoTabela();
 
   if (loading) {
     return (
@@ -45,33 +45,35 @@ export default function BrazilianStandings() {
             </tr>
           </thead>
           <tbody>
-            {standings.map((team) => (
-              <tr
-                key={team.position}
-                className={`border-b border-border hover:bg-primary/30 transition-colors ${
-                  team.isCorinthians ? "bg-accent/10" : ""
-                }`}
-              >
-                <td className="px-4 py-3 text-white font-bold">{team.position}</td>
-                <td className="px-4 py-3 text-white font-semibold">
-                  {team.isCorinthians && <span className="text-accent mr-2">★</span>}
-                  {team.name}
-                </td>
-                <td className="text-center px-2 py-3 text-gray-400">{team.played}</td>
-                <td className="text-center px-2 py-3 text-green-400">{team.wins}</td>
-                <td className="text-center px-2 py-3 text-yellow-400">{team.draws}</td>
-                <td className="text-center px-2 py-3 text-red-400">{team.losses}</td>
-                <td className="text-center px-2 py-3 text-gray-400">{team.goalsFor}</td>
-                <td className="text-center px-2 py-3 text-gray-400">{team.goalsAgainst}</td>
-                <td className="text-center px-2 py-3 text-gray-400">
-                  {team.goalDifference > 0 ? "+" : ""}
-                  {team.goalDifference}
-                </td>
-                <td className="text-center px-4 py-3 text-white font-bold">
-                  {team.points}
-                </td>
-              </tr>
-            ))}
+            {tabela.map((team) => {
+              const isCorinthians = team.time.toLowerCase() === 'corinthians';
+              return (
+                <tr
+                  key={team.posicao}
+                  className={`border-b border-border hover:bg-primary/30 transition-colors ${
+                    isCorinthians ? "bg-accent/10" : ""
+                  }`}
+                >
+                  <td className="px-4 py-3 text-white font-bold">{team.posicao}</td>
+                  <td className="px-4 py-3 text-white font-semibold">
+                    {isCorinthians && <span className="text-accent mr-2">★</span>}
+                    {team.time}
+                  </td>
+                  <td className="text-center px-2 py-3 text-gray-400">{team.jogos}</td>
+                  <td className="text-center px-2 py-3 text-green-400">{team.vitorias}</td>
+                  <td className="text-center px-2 py-3 text-yellow-400">{team.empates}</td>
+                  <td className="text-center px-2 py-3 text-red-400">{team.derrotas}</td>
+                  <td className="text-center px-2 py-3 text-gray-400">{team.gols_pro}</td>
+                  <td className="text-center px-2 py-3 text-gray-400">{team.gols_contra}</td>
+                  <td className="text-center px-2 py-3 text-gray-400">
+                    {team.saldo_gols}
+                  </td>
+                  <td className="text-center px-4 py-3 text-white font-bold">
+                    {team.pontos}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
