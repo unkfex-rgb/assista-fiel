@@ -4,6 +4,22 @@ import { useBrazileiraoTabela } from "@/hooks/useRealFootballData";
 export default function BrazilianStandings() {
   const { tabela, loading, error } = useBrazileiraoTabela();
 
+  // Encontrar posição do Corinthians e pegar 4 acima e 4 abaixo
+  const getFilteredTabela = () => {
+    const corinthiansIndex = tabela.findIndex(
+      (team) => team.time.toLowerCase() === 'corinthians'
+    );
+
+    if (corinthiansIndex === -1) return tabela;
+
+    const startIndex = Math.max(0, corinthiansIndex - 4);
+    const endIndex = Math.min(tabela.length, corinthiansIndex + 5);
+
+    return tabela.slice(startIndex, endIndex);
+  };
+
+  const filteredTabela = getFilteredTabela();
+
   if (loading) {
     return (
       <div className="bg-secondary border border-border rounded-lg p-6">
@@ -45,7 +61,7 @@ export default function BrazilianStandings() {
             </tr>
           </thead>
           <tbody>
-            {tabela.map((team) => {
+            {filteredTabela.map((team) => {
               const isCorinthians = team.time.toLowerCase() === 'corinthians';
               return (
                 <tr

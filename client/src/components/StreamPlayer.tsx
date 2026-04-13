@@ -1,9 +1,26 @@
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, MessageCircle, LogIn } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 
 export default function StreamPlayer() {
   const [chatWidth, setChatWidth] = useState(350);
   const [isDragging, setIsDragging] = useState(false);
+  const [isKickLoggedIn, setIsKickLoggedIn] = useState(false);
+
+  // Verificar se o usuário está logado no Kick usando cookies
+  useEffect(() => {
+    const checkKickLogin = () => {
+      // Verificar cookies do Kick
+      const cookies = document.cookie;
+      const isLoggedIn = cookies.includes('kick_session') || cookies.includes('auth_token');
+      setIsKickLoggedIn(isLoggedIn);
+    };
+
+    checkKickLogin();
+    
+    // Verificar periodicamente se há mudanças de login
+    const interval = setInterval(checkKickLogin, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleMouseDown = () => {
     setIsDragging(true);
@@ -33,10 +50,10 @@ export default function StreamPlayer() {
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      <div className="container py-8">
+      <div className="container py-4">
         {/* Section Title */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
+        <div className="mb-4">
+          <div className="flex items-center gap-3 mb-2">
             <div className="w-4 h-4 bg-accent rounded-full animate-pulse" />
             <h2 className="text-3xl md:text-4xl font-bold">ÚLTIMA LIVE</h2>
           </div>
@@ -90,16 +107,8 @@ export default function StreamPlayer() {
                 src="https://kick.com/popout/corintia420/chat"
                 title="Chat Kick - Corintia420"
                 className="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; cross-origin-isolated"
               />
-            </div>
-
-            {/* Chat Info Footer */}
-            <div className="border-t border-border p-3 bg-background/50">
-              <div className="flex items-center gap-2 text-xs text-gray-400">
-                <LogIn size={14} />
-                <span>Conecte sua conta Kick para comentar</span>
-              </div>
             </div>
           </div>
         </div>
