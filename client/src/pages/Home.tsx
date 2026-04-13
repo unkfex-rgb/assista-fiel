@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import StreamPlayer from "@/components/StreamPlayer";
 import CalendarAndStandings from "@/components/CalendarAndStandings";
+import NotificationCenter from "@/components/NotificationCenter";
+import GoalNotificationCenter from "@/components/GoalNotificationCenter";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -13,6 +15,8 @@ export default function Home() {
         <StreamPlayer />
         <CalendarAndStandings />
       </main>
+      <NotificationCenter />
+      <GoalNotificationCenter />
       <Footer />
     </div>
   );
