@@ -55,7 +55,7 @@ export default function StreamPlayer() {
         <div className="mb-4">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-4 h-4 bg-accent rounded-full animate-pulse" />
-            <h2 className="text-3xl md:text-4xl font-bold">ÚLTIMA LIVE</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">TRANSMISSÃO AO VIVO</h2>
           </div>
           <div className="h-1 w-20 bg-accent" />
         </div>
